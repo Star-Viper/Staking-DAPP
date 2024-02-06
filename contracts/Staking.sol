@@ -33,9 +33,11 @@ contract Staking is ReentrancyGuard{
     if(totalStakedTokens==0){
         return rewardPerTokenStored;
     }
+
     uint totalTime = block.timestamp.sub(lastUpdateTime);
     uint totalRewards = REWARD_RATE.mul(totalTime); 
     return rewardPerTokenStored.add(totalRewards.mul(1e18).div(totalStakedTokens));
+
   }
 
   function earned(address account) public view returns(uint){
@@ -56,8 +58,8 @@ contract Staking is ReentrancyGuard{
     stakedBalance[msg.sender]=stakedBalance[msg.sender].add(amount);
     emit Staked(msg.sender,amount);
     bool success = s_stakingToken.transferFrom(msg.sender,address(this),amount);
-    require(success,"Transfer Failed");
-  }
+    requi
+
   function withdrawStakedTokens(uint amount) external nonReentrant updateReward(msg.sender)  {
     require(amount>0,"Amount must be greater than zero");
     require(stakedBalance[msg.sender]>=amount,"Staked amount not enough");
