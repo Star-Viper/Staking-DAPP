@@ -1,0 +1,6 @@
+This for reference only.
+
+Stake Token: 0x5263fdc29e84891ded4e0fb8be4084398d9a6e84
+RWD: 0x58b54e15f69d6e3b8a6a82a0805c5f7a18ac1e43
+Staking Contract: 0xfB528B5905C8f9398fb625Ab4155C567A75cCC9F
+

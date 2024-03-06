@@ -52,23 +52,25 @@ contract Staking is ReentrancyGuard{
     _;
   }
 
-  function stake(uint amount) external nonReentrant updateReward(msg.sender){
+function stake(uint amount) external nonReentrant updateReward(msg.sender){
     require(amount>0,"Amount must be greater than zero");
     totalStakedTokens=totalStakedTokens.add(amount);
     stakedBalance[msg.sender]=stakedBalance[msg.sender].add(amount);
     emit Staked(msg.sender,amount);
     bool success = s_stakingToken.transferFrom(msg.sender,address(this),amount);
-    requi
+    require(success,"Transfer Failed"); // Added this line
+}
 
-  function withdrawStakedTokens(uint amount) external nonReentrant updateReward(msg.sender)  {
+function withdrawStakedTokens(uint amount) external nonReentrant updateReward(msg.sender)  {
     require(amount>0,"Amount must be greater than zero");
     require(stakedBalance[msg.sender]>=amount,"Staked amount not enough");
     totalStakedTokens=totalStakedTokens.sub(amount);
     stakedBalance[msg.sender]=stakedBalance[msg.sender].sub(amount);
-    emit Withdrawn(msg.sender, amount);(msg.sender,amount);
+    emit Withdrawn(msg.sender, amount); // Corrected this line
     bool success = s_stakingToken.transfer(msg.sender,amount);
     require(success,"Transfer Failed");
-  }
+}
+
 
   function getReward() external nonReentrant updateReward(msg.sender){
      uint reward = rewards[msg.sender];

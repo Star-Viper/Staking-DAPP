@@ -23,6 +23,7 @@ const ClaimReward = ()=>{
     //   } else{
     //     setTransactionStatus("Transaction failed. Please try again.");
     //   }
+    
   }catch(error){
     console.error("Claim Reward Failed",error.message)
   }
